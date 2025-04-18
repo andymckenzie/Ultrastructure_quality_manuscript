@@ -1,0 +1,9 @@
+Metric,Value
+Global DICE (Union Method),0.7305595356467788
+Global DICE (Sum Method),0.7810502435099524
+Mean Pairwise DICE,0.590796900668504
+Median Pairwise DICE,0.7857416782443255
+Pairwise DICE Std Dev,0.35815863033470297
+Number of Overlapping Pairs,294.0
+Total Polygons in Set 1,339.0
+Total Polygons in Set 2,232.0
