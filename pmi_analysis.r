@@ -1,5 +1,5 @@
 # Read the CSV file
-data <- read.csv("2025-04-09-EM Annotation Tracker.csv", header = TRUE, stringsAsFactors = FALSE)
+data <- read.csv("2025-04-18-EM Annotation Tracker.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # Clean the data - fill in missing donor IDs
 for (i in 2:nrow(data)) {
@@ -10,17 +10,19 @@ for (i in 2:nrow(data)) {
 }
 
 # Convert to numeric values
-data$AIZ...in.one.image <- as.numeric(gsub("%", "", data$AIZ...in.one.image))
+data$AIZ.percentage..in.one.annotated.image. <- as.numeric(gsub("%", "", data$AIZ.percentage..in.one.annotated.image.))
 data$PMI <- as.numeric(gsub(" hours", "", data$PMI))
+data$Percentage.of.images.with.AIZ.artifacts..count.total. <- as.numeric(gsub("%.*$", "", data$Percentage.of.images.with.AIZ.artifacts..count.total.))
 
 # Split the data by region
 thalamus_data <- subset(data, Region == "Thalamus")
 cortex_data <- subset(data, Region == "Cortex")
 
-cor.test(cortex_data$AIZ...in.one.image, cortex_data$PMI, method = "spearman")
-cor.test(cortex_data$Average.quality.score.grade, cortex_data$PMI, method = "spearman")
+cor.test(cortex_data$AIZ.percentage..in.one.annotated.image., cortex_data$PMI, method = "spearman")
+cor.test(cortex_data$Percentage.of.images.with.AIZ.artifacts..count.total., cortex_data$PMI, method = "spearman")
 
-cor.test(thalamus_data$AIZ...in.one.image, thalamus_data$PMI, method = "spearman")
-cor.test(thalamus_data$Average.quality.score.grade, thalamus_data$PMI, method = "spearman")
+cor.test(thalamus_data$AIZ.percentage..in.one.annotated.image., thalamus_data$PMI, method = "spearman")
+cor.test(thalamus_data$Percentage.of.images.with.AIZ.artifacts..count.total., thalamus_data$PMI, method = "spearman")
 
-t.test(thalamus_data$Average.quality.score.grade, cortex_data$Average.quality.score.grade)
+t.test(thalamus_data$Percentage.of.images.with.AIZ.artifacts..count.total., cortex_data$Percentage.of.images.with.AIZ.artifacts..count.total.)
+t.test(thalamus_data$AIZ.percentage..in.one.annotated.image., cortex_data$AIZ.percentage..in.one.annotated.image.)
