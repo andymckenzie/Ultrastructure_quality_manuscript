@@ -1,5 +1,5 @@
 # Read the CSV file
-data <- read.csv("2025-04-18-EM Annotation Tracker.csv", header = TRUE, stringsAsFactors = FALSE)
+data <- read.csv("2025-06-06-EM Annotation Tracker.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # Clean the data - fill in missing donor IDs
 for (i in 2:nrow(data)) {
@@ -18,6 +18,7 @@ data$Percentage.of.images.with.AIZ.artifacts..count.total. <- as.numeric(gsub("%
 thalamus_data <- subset(data, Region == "Thalamus")
 cortex_data <- subset(data, Region == "Cortex")
 
+# PMI 
 cor.test(cortex_data$AIZ.percentage..in.one.annotated.image., cortex_data$PMI, method = "spearman")
 cor.test(cortex_data$Percentage.of.images.with.AIZ.artifacts..count.total., cortex_data$PMI, method = "spearman")
 
@@ -26,3 +27,15 @@ cor.test(thalamus_data$Percentage.of.images.with.AIZ.artifacts..count.total., th
 
 t.test(thalamus_data$Percentage.of.images.with.AIZ.artifacts..count.total., cortex_data$Percentage.of.images.with.AIZ.artifacts..count.total.)
 t.test(thalamus_data$AIZ.percentage..in.one.annotated.image., cortex_data$AIZ.percentage..in.one.annotated.image.)
+
+# Fixation time 
+cor.test(cortex_data$AIZ.percentage..in.one.annotated.image., cortex_data$Fixation.Time..Months., method = "spearman")
+cor.test(cortex_data$Percentage.of.images.with.AIZ.artifacts..count.total., cortex_data$Fixation.Time..Months., method = "spearman")
+
+cor.test(thalamus_data$AIZ.percentage..in.one.annotated.image., thalamus_data$Fixation.Time..Months., method = "spearman")
+cor.test(thalamus_data$Percentage.of.images.with.AIZ.artifacts..count.total., thalamus_data$Fixation.Time..Months., method = "spearman")
+
+# Fixation time and intravascular material grade 
+
+cor.test(cortex_data$Intravascular.material.grade.on.H.E.images, cortex_data$Fixation.Time..Months., method = "spearman")
+cor.test(thalamus_data$Intravascular.material.grade.on.H.E.images, thalamus_data$Fixation.Time..Months., method = "spearman")
